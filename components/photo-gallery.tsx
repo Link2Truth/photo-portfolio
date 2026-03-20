@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 
 const photos = [
   {
@@ -67,8 +67,30 @@ const photos = [
 
 export function PhotoGallery() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<typeof photos[0] | null>(null);
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedPhoto(null);
+      }
+    };
+
+    if (selectedPhoto) {
+      document.addEventListener("keydown", handleKeyDown);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedPhoto]);
 
   return (
+    <>
     <section
       id="portfolio"
       aria-label="摄影作品"
@@ -132,6 +154,7 @@ export function PhotoGallery() {
                   }}
                   onHoverStart={() => setHoveredIndex(index)}
                   onHoverEnd={() => setHoveredIndex(null)}
+                  onClick={() => setSelectedPhoto(photo)}
                 >
                   <div
                     className="relative aspect-video w-80 md:w-[28rem] lg:w-[32rem] rounded-lg overflow-hidden transition-transform duration-300"
@@ -173,6 +196,7 @@ export function PhotoGallery() {
                     <div
                       key={`${repeatIndex}-${photo.id}`}
                       className="group cursor-pointer flex-shrink-0"
+                      onClick={() => setSelectedPhoto(photo)}
                     >
                       <div
                         className="relative aspect-video w-64 rounded-lg overflow-hidden transition-transform duration-300"
@@ -219,5 +243,62 @@ export function PhotoGallery() {
         </Button>
       </div>
     </section>
+
+    {/* Lightbox Modal */}
+    <AnimatePresence>
+    {selectedPhoto && (
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setSelectedPhoto(null)}
+      >
+        <motion.div
+          className="relative max-w-4xl w-full mx-4 bg-background rounded-2xl overflow-hidden shadow-2xl"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <button
+            onClick={() => setSelectedPhoto(null)}
+            className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          {/* Image */}
+          <div className="relative aspect-video w-full">
+            <Image
+              src={selectedPhoto.image}
+              alt={selectedPhoto.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              priority
+            />
+          </div>
+
+          {/* Photo Details */}
+          <div className="p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium">
+                {selectedPhoto.category}
+              </span>
+            </div>
+            <h3 className="text-2xl font-bold text-foreground mb-2">
+              {selectedPhoto.title}
+            </h3>
+            <p className="text-muted-foreground">
+              {selectedPhoto.description}
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
+    )}
+    </AnimatePresence>
+    </>
   );
 }
