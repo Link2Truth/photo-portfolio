@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const photos = [
   {
@@ -205,6 +207,16 @@ export function PhotoGallery() {
               ))}
           </div>
         </div>
+      </div>
+      <div className="flex justify-center pt-16">
+        <Button
+          variant="default"
+          size="lg"
+          className="group rounded-full px-8"
+        >
+          查看所有
+          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Button>
       </div>
     </section>
   );
