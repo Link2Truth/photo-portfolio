@@ -1,21 +1,33 @@
-import { AuthButton } from "@/components/auth-button";
 import { Suspense } from "react";
+import { PortfolioNav } from "@/components/nav";
+import { HeroSection } from "@/components/hero-section";
+import { PhotoGallery } from "@/components/photo-gallery";
+import { AboutSection } from "@/components/about-section";
+import { ContactSection } from "@/components/contact-section";
+import { Footer } from "@/components/footer";
+import { AuthButton } from "@/components/auth-button";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-          <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-            <div className="flex gap-5 items-center font-semibold">
-              Next.js Supabase Starter
-            </div>
-            <Suspense>
-              <AuthButton />
-            </Suspense>
-          </div>
-        </nav>
-      </div>
+    <main className="min-h-screen">
+      <PortfolioNav
+        authSlot={
+          <Suspense>
+            <AuthButton />
+          </Suspense>
+        }
+      />
+      <HeroSection />
+      <Separator />
+      <PhotoGallery />
+      <Separator />
+      <AboutSection />
+      <Separator />
+      <ContactSection />
+      <Suspense>
+        <Footer />
+      </Suspense>
     </main>
   );
 }
