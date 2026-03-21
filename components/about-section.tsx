@@ -29,10 +29,10 @@ export function AboutSection() {
           {/* 左侧：头像和标签 */}
           <motion.div
             className="flex flex-col items-center"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
             <Avatar className="size-48 mb-8">
               <AvatarImage src="/avatar.jpg" alt="头像" />
@@ -68,10 +68,10 @@ export function AboutSection() {
 
           {/* 右侧：文字部分 */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
               嗨，我是一个普通的摄影爱好者。没有专业背景，也没有商业拍摄，

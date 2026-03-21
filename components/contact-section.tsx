@@ -27,10 +27,10 @@ export function ContactSection() {
           <motion.a
             href="mailto:hello@example.com"
             className="group flex items-center gap-5 p-6 rounded-2xl bg-background border hover:border-primary/50 hover:shadow-lg transition-all"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
           >
             <div className="shrink-0 size-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
               <Mail className="size-6 text-primary" />
@@ -46,10 +46,10 @@ export function ContactSection() {
           {/* 地点 */}
           <motion.div
             className="flex items-center gap-5 p-6 rounded-2xl bg-background border"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
             <div className="shrink-0 size-14 rounded-xl bg-primary/10 flex items-center justify-center">
               <MapPin className="size-6 text-primary" />
@@ -66,7 +66,7 @@ export function ContactSection() {
           className="flex justify-center gap-4 mt-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <a

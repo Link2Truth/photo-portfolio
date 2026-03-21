@@ -37,14 +37,20 @@ export function PhotoGallery() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
             >
               每一张照片背后都有一个故事，或开心，或平淡，但都是我想留住的瞬间。
             </motion.p>
           </div>
 
           {/* Desktop 3D overlapping layout - hidden on mobile */}
-          <div className="hidden md:block relative h-[500px] -mb-[220px]">
+          <motion.div
+            className="hidden md:block relative h-[500px] -mb-[220px]"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="flex -space-x-80 md:-space-x-96 pb-8 pt-40 items-end justify-center">
               {photos.slice(0, 8).map((photo, index) => {
                 const totalImages = 8;
@@ -104,10 +110,16 @@ export function PhotoGallery() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Mobile marquee layout */}
-          <div className="block md:hidden relative pb-8">
+          <motion.div
+            className="block md:hidden relative pb-8"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]">
               {Array(4)
                 .fill(0)
@@ -154,7 +166,7 @@ export function PhotoGallery() {
                   </div>
                 ))}
             </div>
-          </div>
+          </motion.div>
         </div>
         <div className="flex justify-center pt-16">
           <Button
