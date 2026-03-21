@@ -34,17 +34,19 @@ export function Lightbox({ photo, onClose }: LightboxProps) {
     <AnimatePresence>
       {photo && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
           onClick={onClose}
         >
           <motion.div
             className="relative max-w-4xl w-full mx-4 bg-background rounded-2xl overflow-hidden shadow-2xl"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.85, opacity: 0, y: 40 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.85, opacity: 0, y: 40 }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -54,7 +56,12 @@ export function Lightbox({ photo, onClose }: LightboxProps) {
               <X className="h-5 w-5" />
             </button>
 
-            <div className="relative aspect-video w-full">
+            <motion.div
+              className="relative aspect-video w-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.15, duration: 0.4 }}
+            >
               <Image
                 src={photo.image}
                 alt={photo.title}
@@ -63,9 +70,14 @@ export function Lightbox({ photo, onClose }: LightboxProps) {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                 priority
               />
-            </div>
+            </motion.div>
 
-            <div className="p-6">
+            <motion.div
+              className="p-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+            >
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium">
                   {photo.category}
@@ -75,7 +87,7 @@ export function Lightbox({ photo, onClose }: LightboxProps) {
                 {photo.title}
               </h3>
               <p className="text-muted-foreground">{photo.description}</p>
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       )}
