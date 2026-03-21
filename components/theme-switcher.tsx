@@ -22,7 +22,7 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <Button variant="ghost" size="sm" onClick={toggleTheme}>
+    <Button variant="ghost" size="icon" onClick={toggleTheme}>
       {theme === "light" ? (
         <Moon size={16} className="text-muted-foreground" />
       ) : (

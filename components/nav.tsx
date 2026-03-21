@@ -10,13 +10,13 @@ import { cn } from "@/lib/utils";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navItems = [
-  { label: "首页", href: "#home" },
-  { label: "照片", href: "#portfolio" },
-  { label: "关于", href: "#about" },
-  { label: "联系", href: "#contact" },
+  { label: "首页", href: "/#home" },
+  { label: "作品", href: "/#portfolio" },
+  { label: "关于", href: "/#about" },
+  { label: "联系", href: "/#contact" },
 ];
 
-export function PortfolioNav({ authSlot }: { authSlot: React.ReactNode }) {
+export function Nav({ authSlot }: { authSlot: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -39,7 +39,7 @@ export function PortfolioNav({ authSlot }: { authSlot: React.ReactNode }) {
       )}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between p-4">
-        <Link href="#home" className="flex items-center gap-2 font-semibold text-lg">
+        <Link href="/#home" className="flex items-center gap-2 font-semibold text-lg">
           <Camera className="size-5" />
           <span>Photo Gallery</span>
         </Link>
