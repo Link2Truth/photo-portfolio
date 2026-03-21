@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { Nav } from "@/components/nav";
-import { HeroSection } from "@/components/hero-section";
+import { Hero } from "@/components/hero";
 import { PhotoGallery } from "@/components/bento-gallery";
-import { AboutSection } from "@/components/about-section";
-import { ContactSection } from "@/components/contact-section";
+import { About } from "@/components/about";
+import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { AuthButton } from "@/components/auth-button";
 
@@ -17,10 +17,10 @@ export default function Home() {
           </Suspense>
         }
       />
-      <HeroSection />
+      <Hero />
       <PhotoGallery />
-      <AboutSection />
-      <ContactSection />
+      <About />
+      <Contact />
       <Suspense>
         <Footer />
       </Suspense>
